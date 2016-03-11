@@ -32,12 +32,14 @@
         if (property.type == RLMPropertyTypeArray) {
             RLMArray *thisArray = [self valueForKeyPath:property.name];
             RLMArray *thatArray = [object valueForKeyPath:property.name];
-            [thisArray addObjects:thatArray];
+            [self setValue:thatArray forKey:property.name];
         }
         // assume data
         else if (!property.isPrimary) {
             id value = [object valueForKeyPath:property.name];
-            [self setValue:value forKeyPath:property.name];
+            if (value) {
+                [self setValue:value forKeyPath:property.name];
+            }
         }
     }
 }
@@ -49,11 +51,12 @@
 
         if (property.type == RLMPropertyTypeArray) {
             RLMArray *thisArray = [self valueForKeyPath:property.name];
-            RLMArray *newArray = [object valueForKeyPath:property.name];
+            RLMArray *newArray = [[RLMArray alloc] initWithObjectClassName:property.objectClassName];
             
             for (RLMObject *currentObject in thisArray) {
                 [newArray addObject:[currentObject deepCopy]];
             }
+            [object setValue:newArray forKey:property.name];
             
         }
         else if (property.type == RLMPropertyTypeObject) {
