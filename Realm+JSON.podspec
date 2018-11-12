@@ -8,6 +8,10 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/matthewcheok/Realm-JSON'
   s.author   = { 'Matthew Cheok' => 'cheok.jz@gmail.com' }
   s.requires_arc = true
+  s.homepage     = 'https://github.com/chenshixin/Realm-JSON'
+  s.source       = { :git => 'ssh://git@github.com:chenshixin/Realm-JSON.git' }
+  s.author       = { 'huaban' => 'hi@huaban.coom' }
+
 #  s.source   = {
 #   :git => 'https://github.com/demon1105/Realm-JSON.git',
 #   :branch => 'master',
